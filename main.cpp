@@ -2,19 +2,23 @@
 #include <list>
 #include <array>
 
-#include "radixSort.h"
-
 using namespace std;
+
+void printList(list<int>& originalList );
 
 int main()
 {
 	int largest;
 
-	array<int, 7> data{0, 5, 20, 33, 15, 699, 7};
+	array<int, 16> data{81, 5, 20, 33, 15, 699, 7, 12, 0, 66, 43, 72, 90, 400, 350, 1};
 
 	list<int> original;
 	list<int> list0;
 	list<int> list1;
+
+	cout << "Nathanael Meyers and Alan Dunn" << endl;
+	cout << "CS 2420" << endl;
+	cout << "Assignment 10" << endl << endl;
 
 	cout << "This program uses radix sorting to organize a list of numbers." << endl;
 	cout << "The list of numbers being sorted is: ";
@@ -61,10 +65,15 @@ int main()
 		}
 	}
 	
-	
 	//NEED TO GET THIS WORKING, CODE PROVIDED BY BOOK, doesn't work.
 	original.splice(original.begin(), list1);
 	original.splice(original.begin(), list0);	
+	
+	cout << "Sorted by even and odd: ";
+	
+	printList(original);
+	
+	cout <<endl << "---------------------------------------------------------------------------"<< endl;
 	
 	//Split and splice based on the boolean expression ((n/X) % 2 == 0).
 	//n = the number from the list, X starts at 2 and doubles each loop and 
@@ -95,6 +104,11 @@ int main()
 		original.splice(original.begin(), list1);
 		original.splice(original.begin(), list0);
 		
+		cout << "List after being split and spliced by the divisor: " << divisor << endl;
+		printList(original);
+		cout <<endl << "---------------------------------------------------------------------------"<< endl;
+
+		
 		// Double the divisor
 		divisor = divisor * 2;
 	}
@@ -102,17 +116,7 @@ int main()
 	//Print out finished organized list
 	cout << "The organized list is: ";
 	
-	for (list<int>::const_iterator it = original.begin(); it != original.end(); ++it)
-	{
-		if(it == original.end())
-		{
-			cout << *it;
-		}
-		else
-		{
-    		cout << *it << ", ";
-		}
-	}
+	printList(original);
 	
 	cout << endl << endl;
 	
@@ -120,4 +124,19 @@ int main()
 	// End program
 	system("PAUSE");
 	exit(1);
+}
+
+void printList(list<int>& originalList )
+{
+	for (list<int>::const_iterator it = originalList.begin(); it != originalList.end(); ++it)
+	{
+		if(it == originalList.end())
+		{
+			cout << *it;
+		}
+		else
+		{
+    		cout << *it << "  ";
+		}
+	}
 }
