@@ -45,10 +45,10 @@ int main()
 	}
 
 	//Split the list between even and odd
-	while (original.empty == false)
+	while (original.empty() == false)
 	{
-		int temp;
-		temp = original.pop_front;
+		int temp = original.front();
+		original.pop_front();
 
 		//If even, add to list0
 		if (temp % 2 == 0)
@@ -63,8 +63,8 @@ int main()
 	
 	
 	//NEED TO GET THIS WORKING, CODE PROVIDED BY BOOK, doesn't work.
-	splice(original.begin(), list1);
-	splice(original.begin(), list0);	
+	original.splice(original.begin(), list1);
+	original.splice(original.begin(), list0);	
 	
 	//Split and splice based on the boolean expression ((n/X) % 2 == 0).
 	//n = the number from the list, X starts at 2 and doubles each loop and 
@@ -75,10 +75,10 @@ int main()
 	
 	while(divisor < largest)
 	{
-		while (original.empty == false)
+		while (original.empty() == false)
 		{
-			int temp;
-			temp = original.pop_front;
+			int temp = original.front();
+			original.pop_front();
 			
 			if ((temp/divisor) % 2 == 0)
 			{
@@ -92,8 +92,8 @@ int main()
 		
 		
 		//NEED TO GET THIS WORKING, CODE PROVIDED BY BOOK, doesn't work.
-		splice(original.begin(), list1);
-		splice(original.begin(), list0);
+		original.splice(original.begin(), list1);
+		original.splice(original.begin(), list0);
 		
 		// Double the divisor
 		divisor = divisor * 2;
@@ -102,6 +102,19 @@ int main()
 	//Print out finished organized list
 	cout << "The organized list is: ";
 	
+	for (list<int>::const_iterator it = original.begin(); it != original.end(); ++it)
+	{
+		if(it == original.end())
+		{
+			cout << *it;
+		}
+		else
+		{
+    		cout << *it << ", ";
+		}
+	}
+	
+	cout << endl << endl;
 	
 	
 	// End program
