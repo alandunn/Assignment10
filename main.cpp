@@ -13,8 +13,8 @@ int main()
 	array<int, 7> data{0, 5, 20, 33, 15, 699, 7};
 
 	list<int> original;
-	list<int> listEven;
-	list<int> listOdd;
+	list<int> list0;
+	list<int> list1;
 
 	cout << "This program uses radix sorting to organize a list of numbers." << endl;
 	cout << "The list of numbers being sorted is: ";
@@ -50,20 +50,60 @@ int main()
 		int temp;
 		temp = original.pop_front;
 
-		//If even, add to listEven
+		//If even, add to list0
 		if (temp % 2 == 0)
 		{
-			listEven.push_back(temp);
+			list0.push_back(temp);
 		}
 		else
 		{
-			listOdd.push_back(temp);
+			list1.push_back(temp);
 		}
 	}
-
-	splice(original.begin(), listOdd);
-	splice(original.begin(), listEven);
-
+	
+	
+	//NEED TO GET THIS WORKING, CODE PROVIDED BY BOOK, doesn't work.
+	splice(original.begin(), list1);
+	splice(original.begin(), list0);	
+	
+	//Split and splice based on the boolean expression ((n/X) % 2 == 0).
+	//n = the number from the list, X starts at 2 and doubles each loop and 
+	//stops when the divisor (X) is larger then the largest number in the list
+	
+	//Start divisor at 2
+	int divisor = 2;
+	
+	while(divisor < largest)
+	{
+		while (original.empty == false)
+		{
+			int temp;
+			temp = original.pop_front;
+			
+			if ((temp/divisor) % 2 == 0)
+			{
+				list0.push_back(temp);
+			}
+			else 
+			{
+				list1.push_back(temp);
+			}	
+		}
+		
+		
+		//NEED TO GET THIS WORKING, CODE PROVIDED BY BOOK, doesn't work.
+		splice(original.begin(), list1);
+		splice(original.begin(), list0);
+		
+		// Double the divisor
+		divisor = divisor * 2;
+	}
+	
+	//Print out finished organized list
+	cout << "The organized list is: ";
+	
+	
+	
 	// End program
 	system("PAUSE");
 	exit(1);
